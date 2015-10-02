@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/access-type/access-type.iml" filepath="$PROJECT_DIR$/access-type/access-type.iml" />
+      <module fileurl="file://$PROJECT_DIR$/caching/caching.iml" filepath="$PROJECT_DIR$/caching/caching.iml" />
+      <module fileurl="file://$PROJECT_DIR$/entity-listener/entity-listener.iml" filepath="$PROJECT_DIR$/entity-listener/entity-listener.iml" />
+      <module fileurl="file://$PROJECT_DIR$/entity-mapping/entity-mapping.iml" filepath="$PROJECT_DIR$/entity-mapping/entity-mapping.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpa-presentation.iml" filepath="$PROJECT_DIR$/jpa-presentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/n-plus-one/n-plus-one.iml" filepath="$PROJECT_DIR$/n-plus-one/n-plus-one.iml" />
+      <module fileurl="file://$PROJECT_DIR$/secondary-table/secondary-table.iml" filepath="$PROJECT_DIR$/secondary-table/secondary-table.iml" />
+    </modules>
+  </component>
+</project>
