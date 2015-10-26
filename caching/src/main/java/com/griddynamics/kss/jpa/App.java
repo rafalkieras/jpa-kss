@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.Cache;
 import javax.persistence.CacheRetrieveMode;
+import javax.persistence.CacheStoreMode;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.griddynamics.kss.jpa.helper.Transactions.inTransaction;
@@ -25,15 +27,42 @@ public class App
             em.persist(new Customer(1, "John", "Smithson"));
         });
 
-        checkIfEmployeeWasCached();
+        inTransaction(em -> em.getEntityManagerFactory().getCache().evictAll());
 
-        checkIfCustomerWasCached();
+        inTransaction(em -> {
+            boolean contains = em.getEntityManagerFactory().getCache().contains(Employee.class, 1);
+            LOG.info("Contains: {}", contains);
+        });
 
-        loadEmployeeFromDatabaseViaRefresh();
+//        checkIfEmployeeWasCached();
+//
+//        checkIfCustomerWasCached();
+//
+//        loadEmployeeFromDatabaseViaRefresh();
+//
+//        loadEmployeeFromDatabaseOmittingCache();
 
-        loadEmployeeFromDatabaseOmittingCache();
+        inTransaction(em -> {
+            List<Employee> employees = em.createQuery("from Employee e", Employee.class)
+                    .setHint("javax.persistence.cache.storeMode", CacheStoreMode.REFRESH)
+                    .getResultList();
+
+            logEmployees(employees);
+        });
+
+        inTransaction(em -> {
+            boolean contains = em.getEntityManagerFactory().getCache().contains(Employee.class, 1);
+            LOG.info("Contains: {}", contains);
+        });
 
         System.exit(0);
+    }
+
+    private static void logEmployees(List<Employee> employees) {
+        for (Employee employee : employees) {
+            LOG.info("{} {}", employee.getFirstName(), employee.getId());
+        }
+
     }
 
     private static void loadEmployeeFromDatabaseOmittingCache() {

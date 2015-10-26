@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
     <cache
-            name="com.griddynamics.kss.jpa.entity.Employee"
+            name="com.griddynamics.kss.jpa.entity.single.Employee"
             maxEntriesLocalHeap="10000"
             eternal="false"
             timeToIdleSeconds="300"

@@ -22,7 +22,8 @@ public class App
             LOG.info("John Doe is in the database with id {}", johnDoe.getId());
         });
 
-        Transactions.inTransaction(em -> em.persist(new Employee(1, "John", "Smithson")));
+        Employee employee = new Employee(1, "John", "Smithson");
+        Transactions.inTransaction(em -> em.persist(employee));
 
         Transactions.inTransaction(em -> {
             Employee johnSmithson = em.createQuery("from Employee", Employee.class)
@@ -30,6 +31,8 @@ public class App
 
             LOG.info("John Smithson is in the database with id {}", johnSmithson.getId());
         });
+
+        Transactions.inTransaction(em -> LOG.info("DB contains {}", em.contains(employee)));
 
         System.exit(0);
     }

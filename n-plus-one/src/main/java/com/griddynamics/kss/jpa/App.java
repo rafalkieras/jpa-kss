@@ -16,6 +16,20 @@ public class App
 
     public static void main( String[] args )
     {
+        createData();
+
+        showNPlusOneProblem();
+
+        LOG.info("Fetching the phones");
+        preFetchPhones();
+
+        LOG.info("Fetching the phones without duplicated employees");
+        preFetchPhonesWithDistinct();
+
+        System.exit(0);
+    }
+
+    private static void createData() {
         inTransaction(em -> {
             Employee johnDoe = new Employee(1, "John", "Doe");
             johnDoe.addPhone(new Phone(1, "123-456-789"));
@@ -27,16 +41,6 @@ public class App
             johnSmithson.addPhone(new Phone(4, "800-900-999"));
             em.persist(johnSmithson);
         });
-
-        showNPlusOneProblem();
-
-        LOG.info("Fetching the phones");
-        preFetchPhones();
-
-        LOG.info("Fetching the phones without duplicated employees");
-        preFetchPhonesWithDistinct();
-
-        System.exit(0);
     }
 
     private static void showNPlusOneProblem() {

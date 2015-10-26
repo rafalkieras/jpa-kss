@@ -1,32 +1,25 @@
-package com.griddynamics.kss.jpa.entity;
+package com.griddynamics.kss.jpa.entity.single;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(name = "employee")
-@NamedQueries( value = {
-        @NamedQuery(name = "getNames", query = "select e.firstName from Employee e")
-})
-public class Employee {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Person {
 
     @Id
-    private int id;
+    protected int id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    protected String firstName;
 
-    @Column(name = "last_name")
-    private String lastName;
+    protected String lastName;
 
-    public Employee(int id, String firstName, String lastName) {
+    public Person(int id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    protected Employee() {
+    public Person() {
     }
 
     public int getId() {

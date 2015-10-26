@@ -1,14 +1,10 @@
 package com.griddynamics.kss.jpa.entity;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "employee")
-@NamedQueries( value = {
-        @NamedQuery(name = "getNames", query = "select e.firstName from Employee e")
-})
 public class Employee {
 
     @Id

@@ -12,6 +12,9 @@
         <module>n-plus-one</module>
         <module>secondary-table</module>
         <module>caching</module>
+        <module>querying</module>
+        <module>inheritance</module>
+        <module>jpa-2.1</module>
     </modules>
     <packaging>pom</packaging>
 
