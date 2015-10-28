@@ -30,6 +30,7 @@ public class App
         Transactions.inTransaction(em -> {
             List<Employee> employees = em.createQuery("from Employee", Employee.class).getResultList();
             LOG.info("Employees size: {}", employees.size());
+            LOG.info("Employee hiring date: {}", employees.get(0).getHiringDate());
         });
 
         System.exit(0);

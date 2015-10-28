@@ -3,9 +3,9 @@
     <persistence-unit name="primary" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>com.griddynamics.jpa.presentation.entity.Order</class>
-        <class>com.griddynamics.jpa.presentation.entity.Invoice</class>
-        <class>com.griddynamics.jpa.presentation.entity.Item</class>
+        <class>com.griddynamics.kss.jpa.entity.Invoice</class>
+        <class>com.griddynamics.kss.jpa.entity.Item</class>
+        <class>com.griddynamics.kss.jpa.entity.Order</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
@@ -13,7 +13,15 @@
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+
+            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kss" />-->
+            <!--<property name="javax.persistence.jdbc.user" value="root" />-->
+            <!--<property name="javax.persistence.jdbc.password" value="root" />-->
+            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />-->
+
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>
 
     </persistence-unit>

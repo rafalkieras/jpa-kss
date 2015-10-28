@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -33,9 +34,6 @@ public class App
             Item item2 = new Item(2, BigDecimal.TEN, "Item2");
             item2.setOrder(order);
             em.persist(item2);
-
-            order.getItems().add(item1);
-            order.getItems().add(item2);
         });
 
 
@@ -45,11 +43,16 @@ public class App
         service.submit(new Wife());
 
 
-        sleep(3000);
+        sleep(7_000);
 
         inTransaction(em -> {
+            Order order = em.find(Order.class, 1);
             Invoice invoice = em.find(Invoice.class, 1);
-            LOG.info("Invoice for order {} = {}", invoice.getOrder().getId(), invoice.getTotal());
+
+            LOG.info("Order total {}", order.getTotal());
+            LOG.info("Invoice total {}", invoice.getTotal());
+            LOG.info("Order version: {}", order.getVersion());
+
         });
 
         System.exit(0);

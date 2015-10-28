@@ -4,8 +4,8 @@
     <persistence-unit name="primary" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>com.griddynamics.jpa.presentation.entity.Employee</class>
-        <class>com.griddynamics.jpa.presentation.entity.Customer</class>
+        <class>com.griddynamics.kss.jpa.entity.Employee</class>
+        <class>com.griddynamics.kss.jpa.entity.Customer</class>
 
         <shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
 

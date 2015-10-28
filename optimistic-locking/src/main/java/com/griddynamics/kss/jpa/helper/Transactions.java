@@ -30,13 +30,21 @@ public class Transactions {
         try {
             transaction.begin();
             consumer.accept(entityManager);
-        } catch (Exception e) {
-            transaction.rollback();
-            LOG.error(e.getMessage());
         } finally {
-            transaction.commit();
+            if (transaction.isActive()) transaction.commit();
             entityManager.close();
         }
     }
 
+    public static void inThrowingTransaction(ThrowingConsumer<EntityManager> consumer) throws Exception {
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            consumer.accept(entityManager);
+        } finally {
+            if (transaction.isActive()) transaction.commit();
+            entityManager.close();
+        }
+    }
 }

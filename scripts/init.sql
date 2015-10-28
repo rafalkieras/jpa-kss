@@ -1,1 +1,1 @@
-insert into Employee values (1, 'John', 'Doe');
+insert into Employee values (1, 'John', '2015-01-01', 'Doe');

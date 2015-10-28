@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.griddynamics.kss.jpa.helper.Sleeper.sleep;
+import static com.griddynamics.kss.jpa.helper.Transactions.inThrowingTransaction;
 import static com.griddynamics.kss.jpa.helper.Transactions.inTransaction;
 
 public class Husband implements Runnable {
@@ -21,19 +22,32 @@ public class Husband implements Runnable {
 
     @Override
     public void run() {
-        LOG.info("I'll generate the invoice");
+        LOG.info("Husband starting transaction");
 
-        inTransaction(em -> {
-            Map<String, Object> properties = new HashMap<>();
-            properties.put("javax.persistence.lock.scope", PessimisticLockScope.EXTENDED);
-            Order order = em.find(Order.class, 1, LockModeType.PESSIMISTIC_WRITE, properties);
-            em.lock(order, LockModeType.PESSIMISTIC_WRITE, properties);
+        try {
+            generateTheInvoice();
+        } catch (Exception e) {
+            LOG.error(e.getMessage());
+            try {
+                generateTheInvoice();
+            } catch (Exception e1) {
+                LOG.error(e.getMessage());
+            }
+        }
+
+        LOG.info("Husband committed his transaction");
+
+    }
+
+    public void generateTheInvoice() throws Exception {
+        inThrowingTransaction(em -> {
+            Order order = em.find(Order.class, 1, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+
             LOG.info("My order has {} items", order.getItems().size());
-            sleep(1000);
+            sleep(2_000);
 
             Invoice invoice = InvoiceFactory.createInvoice(order);
             em.persist(invoice);
         });
-
     }
 }

@@ -12,9 +12,19 @@ public class Order {
     @Id
     private int id;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "ORDER_ITEM")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order")
     private Set<Item> items = new HashSet<>();
+
+    @Version
+    private Long version;
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 
     public Order(int id) {
         this.id = id;

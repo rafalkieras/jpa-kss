@@ -4,7 +4,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <mapping-file>mappings/customer.xml</mapping-file>
-        <class>com.griddynamics.jpa.presentation.entity.Employee</class>
+        <class>com.griddynamics.kss.jpa.entity.Employee</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
