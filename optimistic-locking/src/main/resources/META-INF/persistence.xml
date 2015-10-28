@@ -3,24 +3,17 @@
     <persistence-unit name="primary" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>com.griddynamics.jpa.presentation.entity.Employee</class>
+        <class>com.griddynamics.jpa.presentation.entity.Order</class>
+        <class>com.griddynamics.jpa.presentation.entity.Invoice</class>
+        <class>com.griddynamics.jpa.presentation.entity.Item</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:presentationdb"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
-
-
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
-            <property name="javax.persistence.schema-generation.scripts.create-target" value="scripts/createSchema.sql"/>
-            <property name="javax.persistence.schema-generation.scripts.drop-target" value="scripts/dropSchema.sql"/>
-            <property name="javax.persistence.sql-load-script-source" value="scripts/init.sql"/>
-
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-
-
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
 
     </persistence-unit>

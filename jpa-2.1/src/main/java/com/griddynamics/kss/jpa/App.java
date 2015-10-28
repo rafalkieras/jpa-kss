@@ -1,12 +1,14 @@
 package com.griddynamics.kss.jpa;
 
 
+import com.griddynamics.kss.jpa.entity.Employee;
 import com.griddynamics.kss.jpa.helper.Transactions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import java.util.List;
 
 public class App
 {
@@ -23,6 +25,11 @@ public class App
 
             System.out.println(currentDateProcedure.getSingleResult());
 
+        });
+
+        Transactions.inTransaction(em -> {
+            List<Employee> employees = em.createQuery("from Employee", Employee.class).getResultList();
+            LOG.info("Employees size: {}", employees.size());
         });
 
         System.exit(0);

@@ -15,6 +15,7 @@
         <module>querying</module>
         <module>inheritance</module>
         <module>jpa-2.1</module>
+        <module>optimistic-locking</module>
     </modules>
     <packaging>pom</packaging>
 
