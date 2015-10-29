@@ -31,10 +31,9 @@ public class Transactions {
             transaction.begin();
             consumer.accept(entityManager);
         } catch (Exception e) {
-            transaction.rollback();
-            throw new RuntimeException("Something went wrong", e);
+            LOG.error(e.getCause().toString());
         } finally {
-            transaction.commit();
+            if (transaction.isActive()) transaction.commit();
             entityManager.close();
         }
     }

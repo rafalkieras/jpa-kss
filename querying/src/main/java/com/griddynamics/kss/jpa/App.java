@@ -29,6 +29,13 @@ public class App
         });
 
         inTransaction(em -> {
+            List<String> employees = em.createQuery("select e.firstName from Employee e", String.class)
+                    .getResultList();
+
+            LOG.info("Employees {}", employees);
+        });
+
+        inTransaction(em -> {
             List<String> employees = em.createNamedQuery("Employee.getFirstNames", String.class)
                     .getResultList();
 
