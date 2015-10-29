@@ -1,7 +1,5 @@
 package com.griddynamics.kss.jpa.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;

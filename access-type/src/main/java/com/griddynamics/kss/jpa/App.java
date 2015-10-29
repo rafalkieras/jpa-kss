@@ -15,7 +15,15 @@ public class App
 
     public static void main( String[] args )
     {
-        inTransaction(em -> em.persist(new Product(1, "XYZ123", new BigDecimal("199.99"), new BigDecimal("5.00"))));
+        inTransaction(em -> {
+            em.persist(new Product(1, "XYZ123", new BigDecimal("199.99"), new BigDecimal("0.00")));
+        });
+
+        inTransaction(em -> {
+            Product product = em.find(Product.class, 1);
+
+            product.setDiscount(new BigDecimal("5.00"));
+        });
 
         inTransaction(em -> {
             Product product = em.createQuery("from Product where code = :code", Product.class)
