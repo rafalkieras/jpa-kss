@@ -4,6 +4,7 @@ package com.griddynamics.kss.jpa;
 import com.griddynamics.kss.jpa.entity.Invoice;
 import com.griddynamics.kss.jpa.entity.Item;
 import com.griddynamics.kss.jpa.entity.Order;
+import com.griddynamics.kss.jpa.worker.BetterHusband;
 import com.griddynamics.kss.jpa.worker.Husband;
 import com.griddynamics.kss.jpa.worker.Wife;
 import org.slf4j.Logger;
@@ -39,18 +40,21 @@ public class App
 
         ExecutorService service = Executors.newFixedThreadPool(2);
 
-        service.submit(new Husband());
+        service.submit(new BetterHusband());
         service.submit(new Wife());
 
 
-        sleep(7_000);
+        sleep(3_000);
 
         inTransaction(em -> {
             Order order = em.find(Order.class, 1);
             Invoice invoice = em.find(Invoice.class, 1);
 
+            if (invoice != null) {
+                LOG.info("Invoice total {}", invoice.getTotal());
+            }
+
             LOG.info("Order total {}", order.getTotal());
-            LOG.info("Invoice total {}", invoice.getTotal());
             LOG.info("Order version: {}", order.getVersion());
 
         });

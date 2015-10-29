@@ -21,12 +21,12 @@ public class Wife implements Runnable {
 
         LOG.info("I'll add some more items to the order");
         inTransaction(em -> {
-            Order order = em.find(Order.class, 1, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+            Order order = em.find(Order.class, 1);
             Item item3 = new Item(3, BigDecimal.TEN, "Item3");
             item3.setOrder(order);
             em.persist(item3);
         });
-        LOG.info("Wife committed her transaction");
+        LOG.info("Wife finished her work");
 
     }
 }
